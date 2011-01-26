@@ -14,6 +14,15 @@
         <path path="${lib.externals}/processing-core.jar"/>
         <path path="${lib.externals}/equinox.jar"/>
         <path path="${lib}/phys2d.jar"/>
+        <path path="${lib}/blobDetection.jar"/>
+        <path path="${lib}/sms.jar"/>
+        <path path="${lib}/minim.jar"/>
+        <path path="${lib}/minim-spi.jar"/>
+        <path path="${lib}/jsminim.jar"/>
+        <path path="${lib}/jl1.0.jar"/>
+        <path path="${lib}/mp3spi1.9.4.jar"/>
+        <path path="${lib}/tritonus_aos.jar"/>
+        <path path="${lib}/tritonus_share.jar"/>
     </path>
 
     <target name="init">
@@ -26,11 +35,21 @@
 
     <target name="embed-dependencies" depends="init">
         <copy file="${lib}/phys2d.jar" todir="${build}"/>
+        <copy file="${lib}/blobDetection.jar" todir="${build}"/>
+        <copy file="${lib}/sms.jar" todir="${build}"/>
+        <copy file="${lib}/libUnimotionLib.jnilib" todir="${build}"/>
+        <copy file="${lib}/minim.jar" todir="${build}"/>
+        <copy file="${lib}/minim-spi.jar" todir="${build}"/>
+        <copy file="${lib}/jsminim.jar" todir="${build}"/>
+        <copy file="${lib}/jl1.0.jar" todir="${build}"/>
+        <copy file="${lib}/mp3spi1.9.4.jar" todir="${build}"/>
+        <copy file="${lib}/tritonus_aos.jar" todir="${build}"/>
+        <copy file="${lib}/tritonus_share.jar" todir="${build}"/>
     </target>
 
     <target name="dist" depends="compile,embed-dependencies">
         <mkdir dir="${dist}"/>
-        <jar jarfile="${dist}/demolib.jar" basedir="${build}" manifest="manifest.mf"/>
+        <jar jarfile="${dist}/demolibtest.jar" basedir="${build}" manifest="manifest.mf"/>
     </target>
 
     <target name="clean">

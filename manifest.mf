@@ -1,8 +1,10 @@
 Manifest-Version: 1
 Bundle-ManifestVersion: 2
-Bundle-SymbolicName: demolib
+Bundle-SymbolicName: demolibtest
 Bundle-Name: SceneBuilder Demonstration Library
 Bundle-Version: 1.0.0
-Bundle-ClassPath: .,phys2d.jar
+Bundle-ClassPath: .,phys2d.jar,blobDetection.jar,sms.jar,minim.jar,minim-spi.jar,jsminim.jar,tritonus_share.jar,tritonus_aos.jar,jl1.0.jar,mp3spi1.9.4.jar
+Bundle-NativeCode: libUnimotionLib.jnilib ; osname=macosx ; processor=x86
+DynamicImport-Package: *
 Import-Package: org.osgi.framework, processing.core, nodebox.node, nodebox.util
-Export-Node: demolib.PhysicsNode
+Export-Node: demolibtest.PhysicsNode, demolibtest.BlobDetect, demolibtest.MotionSensor, demolibtest.fftAnalysis

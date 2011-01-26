@@ -1,4 +1,4 @@
-package demolib;
+package demolibtest;
 
 import net.phys2d.raw.strategies.QuadSpaceStrategy;
 import nodebox.node.*;
