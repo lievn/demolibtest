@@ -15,13 +15,14 @@ public class BlobDetect extends Node {
 
     public final ImagePort pImage = new ImagePort(this, "inputImage", Port.Direction.INPUT);
     public final BlobList allBlobs = new BlobList(this, "blobs", Port.Direction.OUTPUT);
+    public final IntPort totalBlobs = new IntPort(this, "BlobsNb", Port.Direction.OUTPUT);
     public final EdgeList allEdges = new EdgeList(this, "edges", Port.Direction.OUTPUT);
+    public final IntPort totalEdges = new IntPort(this, "EdgesNb", Port.Direction.OUTPUT);
     public final FloatPort threshold = new FloatPort(this, "threshold", Port.Direction.INPUT, 0.5f);
     public final BooleanPort discrimination = new BooleanPort(this, "posdiscr", Port.Direction.INPUT, false);
     public final BooleanPort dblobs = new BooleanPort(this, "drawblobs", Port.Direction.INPUT, true);
     public final BooleanPort dedges = new BooleanPort(this, "drawedges", Port.Direction.INPUT, false);
     public final BooleanPort dtriang = new BooleanPort(this, "drawtriangles", Port.Direction.INPUT, false);
-    public final IntPort blur = new IntPort(this, "blur", Port.Direction.INPUT, 2);
     public final FloatPort X = new FloatPort(this, "X", Port.Direction.OUTPUT);
     public final FloatPort Y = new FloatPort(this, "Y", Port.Direction.OUTPUT);
     private BlobDetection theBlobDetection;
@@ -44,7 +45,7 @@ public class BlobDetect extends Node {
             computeBlobs();
             computeEdges();
 
-            //test for sending xy biggestblob
+            //x and y  biggestblob
             X.set(theBiggestBlob.xMin * pImage.get().width);
             Y.set(theBiggestBlob.yMin * pImage.get().height);
         }
@@ -55,11 +56,9 @@ public class BlobDetect extends Node {
         g.image(pImage.get(), 0, 0, pImage.get().width, pImage.get().height);
 
         if (dblobs.get()) {
-            //computeBlobs(g);
             drawBlobs(g);
         }
         if (dedges.get()) {
-            //computeEdges(g);
             drawEdges(g);
         }
         if (dtriang.get()) {
@@ -151,7 +150,7 @@ public class BlobDetect extends Node {
             }
         }
         allBlobs.set(blobs);
-        //System.out.println(blobs);
+        totalBlobs.set(theBlobDetection.getBlobNb());
     }
 
 
@@ -159,11 +158,13 @@ public class BlobDetect extends Node {
         EdgeVertex aa, bb;
         Blob b;
         ArrayList<EdgeVertex> edges = new ArrayList<EdgeVertex>();
-
+        int total = 0;
 
         for (int n = 0; n < theBlobDetection.getBlobNb(); n++) {
             b = theBlobDetection.getBlob(n);
+            total+=b.getEdgeNb();
             for (int p = 0; p < b.getEdgeNb(); p++) {
+
                 aa = b.getEdgeVertexA(p);
                 bb = b.getEdgeVertexB(p);
                 edges.add(aa);
@@ -171,7 +172,7 @@ public class BlobDetect extends Node {
             }
         }
         allEdges.set(edges);
-        //System.out.println(edges);
+        totalEdges.set(total);
     }
 
 
