@@ -14,12 +14,13 @@ public class Fluid extends Node {
     private static final float FLUID_WIDTH = 20;
     private MSAFluidSolver2D fluidSolver;
     private static float invWidth, invHeight;
+    private static int number = 50;
 
     public final FloatPort pX = new FloatPort(this, "x", Port.Direction.INPUT);
     public final FloatPort pY = new FloatPort(this, "y", Port.Direction.INPUT);
     public final FloatPort pPreviousX = new FloatPort(this, "previousX", Port.Direction.INPUT);
     public final FloatPort pPreviousY = new FloatPort(this, "previousY", Port.Direction.INPUT);
-    public final IntPort pamount = new IntPort(this, "amount", Port.Direction.INPUT,10);
+    public final IntPort pamount = new IntPort(this, "amount", Port.Direction.INPUT,50);
     public final FluidSolverPort pFluidSolver = new FluidSolverPort(this, "fluid", Port.Direction.OUTPUT);
 
     public final ForceList allForces = new ForceList(this, "forces", Port.Direction.OUTPUT);
@@ -42,8 +43,11 @@ public class Fluid extends Node {
         float mouseVelY = (pY.get() - pPreviousY.get()) * invHeight;
         addForce(mouseNormX, mouseNormY, mouseVelX, mouseVelY);
         fluidSolver.update();
+        if (pamount.get()!=number){
+         createForces();
+            number=pamount.get();
+        }
         updateForces();
-
         pFluidSolver.set(fluidSolver);
     }
 
@@ -71,13 +75,8 @@ public class Fluid extends Node {
     public void updateForces() {
         Force f;
         for (int n = 0; n < pamount.get(); n++) {
-            f = forces.get(n); //allForces.get().get(index.get())
+            f = forces.get(n);
             f.update(fluidSolver);
-            //System.out.print(f.x);
-            //if (f != null) {
-              //  forces.add(f);
-
-            //}
         }
         allForces.set(forces);
     }
