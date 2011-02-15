@@ -23,6 +23,7 @@
         <path path="${lib}/mp3spi1.9.4.jar"/>
         <path path="${lib}/tritonus_aos.jar"/>
         <path path="${lib}/tritonus_share.jar"/>
+        <path path="${lib}/MSAFluid.jar"/>
     </path>
 
     <target name="init">
@@ -45,6 +46,7 @@
         <copy file="${lib}/mp3spi1.9.4.jar" todir="${build}"/>
         <copy file="${lib}/tritonus_aos.jar" todir="${build}"/>
         <copy file="${lib}/tritonus_share.jar" todir="${build}"/>
+        <copy file="${lib}/MSAFluid.jar" todir="${build}"/>
     </target>
 
     <target name="dist" depends="compile,embed-dependencies">

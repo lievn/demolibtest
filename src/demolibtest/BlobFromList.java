@@ -9,8 +9,8 @@ public class BlobFromList extends Node{
 
     public final BlobList allBlobs = new BlobList(this, "blobs", Port.Direction.INPUT);
     public final IntPort index = new IntPort(this, "index", Port.Direction.INPUT);
-    public final FloatPort width = new FloatPort(this, "width", Port.Direction.INPUT);
-    public final FloatPort height = new FloatPort(this, "height", Port.Direction.INPUT);
+    public final FloatPort width = new FloatPort(this, "width", Port.Direction.INPUT,320.0f);
+    public final FloatPort height = new FloatPort(this, "height", Port.Direction.INPUT,240.0f);
     public final FloatPort X = new FloatPort(this, "X", Port.Direction.OUTPUT);
     public final FloatPort Y = new FloatPort(this, "Y", Port.Direction.OUTPUT);
     public final FloatPort W = new FloatPort(this, "W", Port.Direction.OUTPUT);
