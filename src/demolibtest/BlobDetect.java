@@ -23,6 +23,7 @@ public class BlobDetect extends Node {
     public final BooleanPort dblobs = new BooleanPort(this, "drawblobs", Port.Direction.INPUT, true);
     public final BooleanPort dedges = new BooleanPort(this, "drawedges", Port.Direction.INPUT, false);
     public final BooleanPort dtriang = new BooleanPort(this, "drawtriangles", Port.Direction.INPUT, false);
+    public final BooleanPort dimage = new BooleanPort(this, "drawImage", Port.Direction.INPUT, false);
     public final FloatPort X = new FloatPort(this, "X", Port.Direction.OUTPUT);
     public final FloatPort Y = new FloatPort(this, "Y", Port.Direction.OUTPUT);
     private BlobDetection theBlobDetection;
@@ -53,7 +54,9 @@ public class BlobDetect extends Node {
 
     @Override
     public void draw(PGraphics g, Context context, float v) {
+        if (dimage.get()) {
         g.image(pImage.get(), 0, 0, pImage.get().width, pImage.get().height);
+        }
 
         if (dblobs.get()) {
             drawBlobs(g);

@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ndbx formatVersion="3">
+<property key="processing.drawBackground" value="true"/>
+<property key="processing.width" value="500"/>
+<property key="processing.height" value="500"/>
+<property key="processing.smooth" value="true"/>
+<property key="processing.backgroundColor" value="192,192,192"/>
+<property key="processing.frameRate" value="60"/>
+<property key="processing.renderer" value="processing.core.PGraphicsJava2D"/>
+<node displayName="Root" name="root" type="nodebox.node.Network" x="0" y="0">
+<node name="blobDetect1" type="demolibtest.BlobDetect" x="2" y="243">
+<port name="threshold">0.71999997</port>
+<port name="posdiscr">true</port>
+<port name="drawblobs">true</port>
+<port name="drawedges">true</port>
+<port name="drawtriangles">false</port>
+<port name="drawImage">true</port>
+</node>
+<node name="capture1" type="nodebox.video.Capture" x="2" y="192"/>
+<node name="expression1" type="nodebox.builtins.math.Expression" x="365" y="17">
+<data name="expression">a - b</data>
+<port name="a">406.243</port>
+<port name="b">5.0</port>
+</node>
+<node name="expression2" type="nodebox.builtins.math.Expression" x="371" y="122">
+<data name="expression">a -b</data>
+<port name="a">254.47292</port>
+<port name="b">5.0</port>
+</node>
+<node name="fluid1" type="demolibtest.Fluid" x="324" y="345">
+<port name="x">406.243</port>
+<port name="y">254.47292</port>
+<port name="previousX">401.243</port>
+<port name="previousY">249.47292</port>
+<port name="amount">200</port>
+</node>
+<node name="looper1" rendered="true" type="nodebox.builtins.utility.Looper" x="471" y="241">
+<port name="amount">200</port>
+<node name="ellipse1" rendered="true" type="nodebox.builtins.draw.Ellipse" x="530" y="172">
+<port name="x">379.07794</port>
+<port name="y">18.513462</port>
+<port name="width">28.676441</port>
+<port name="height">28.676441</port>
+<port name="fill">#ff81ff44</port>
+<port name="stroke">#00000048</port>
+<port name="strokeWeight">1.0</port>
+</node>
+<node name="expression1" type="nodebox.builtins.math.Expression" x="283" y="10">
+<data name="expression">a + b*Math.sin(c/10.0)</data>
+<port name="a">20.0</port>
+<port name="b">10.0</port>
+<port name="c">199.0</port>
+</node>
+<node name="expression2" type="nodebox.builtins.math.Expression" x="92" y="420">
+<data name="expression">(a + b) / c</data>
+<port name="a">199.0</port>
+<port name="b">1.0</port>
+<port name="c">5.0</port>
+</node>
+<node name="expression3" type="nodebox.builtins.math.Expression" x="52" y="528">
+<data name="expression">a * b / c</data>
+<port name="a">28.676441</port>
+<port name="b">493.65952</port>
+<port name="c">50.0</port>
+</node>
+<node name="inputSplitter1" type="nodebox.builtins.utility.InputSplitter" x="40" y="15">
+<port name="input" published="true"/>
+</node>
+<node name="line1" type="nodebox.builtins.draw.Line" x="337" y="289">
+<port name="x1">349.72125</port>
+<port name="y1">203.10132</port>
+<port name="x2">55.678764</port>
+<port name="y2">444.16788</port>
+<port name="stroke">#000000ff</port>
+<port name="strokeWeight">1.0</port>
+</node>
+<node name="looperVariables1" type="nodebox.builtins.utility.LooperVariables" x="2" y="192"/>
+<node name="pickForce1" type="demolibtest.PickForce" x="194" y="132">
+<port name="index">199</port>
+</node>
+<node name="pickForce2" type="demolibtest.PickForce" x="81" y="265">
+<port name="index">40</port>
+</node>
+<node name="rGBColor1" type="nodebox.builtins.color.RGBColor" x="333" y="489">
+<port name="red">283.12796</port>
+<port name="green">40.0</port>
+<port name="blue">140.0</port>
+<port name="alpha">21.0</port>
+<port name="range">79.0</port>
+</node>
+<conn input="pickForce1" inputPort="forces" output="inputSplitter1" outputPort="output"/>
+<conn input="pickForce1" inputPort="index" output="looperVariables1" outputPort="index"/>
+<conn input="ellipse1" inputPort="x" output="pickForce1" outputPort="X"/>
+<conn input="ellipse1" inputPort="y" output="pickForce1" outputPort="Y"/>
+<conn input="ellipse1" inputPort="width" output="expression1" outputPort="result"/>
+<conn input="ellipse1" inputPort="height" output="expression1" outputPort="result"/>
+<conn input="line1" inputPort="x1" output="pickForce1" outputPort="X"/>
+<conn input="line1" inputPort="y1" output="pickForce1" outputPort="Y"/>
+<conn input="expression2" inputPort="a" output="looperVariables1" outputPort="index"/>
+<conn input="pickForce2" inputPort="index" output="expression2" outputPort="result"/>
+<conn input="pickForce2" inputPort="forces" output="inputSplitter1" outputPort="output"/>
+<conn input="line1" inputPort="x2" output="pickForce2" outputPort="X"/>
+<conn input="line1" inputPort="y2" output="pickForce2" outputPort="Y"/>
+<conn input="ellipse1" inputPort="fill" output="rGBColor1" outputPort="color"/>
+<conn input="expression3" inputPort="a" output="expression1" outputPort="result"/>
+<conn input="expression3" inputPort="b" output="pickForce2" outputPort="Y"/>
+<conn input="expression1" inputPort="c" output="looperVariables1" outputPort="index"/>
+<conn input="rGBColor1" inputPort="red" output="expression3" outputPort="result"/>
+<conn input="rGBColor1" inputPort="green" output="expression2" outputPort="result"/>
+</node>
+<node name="looper2" type="nodebox.builtins.utility.Looper" x="174" y="48">
+<port name="amount">1</port>
+<node name="blobFromList1" type="demolibtest.BlobFromList" x="321" y="155">
+<port name="index">0</port>
+<port name="width">500.0</port>
+<port name="height">500.0</port>
+<port name="X" published="true"/>
+<port name="Y" published="true"/>
+</node>
+<node name="expression1" type="nodebox.builtins.math.Expression" x="44" y="239">
+<data name="expression">a</data>
+<port name="a">1.0</port>
+</node>
+<node name="inputSplitter1" type="nodebox.builtins.utility.InputSplitter" x="119" y="29">
+<port name="input" published="true"/>
+</node>
+<node name="looperVariables1" type="nodebox.builtins.utility.LooperVariables" x="170" y="331"/>
+<node name="rect1" rendered="true" type="nodebox.builtins.draw.Rect" x="507" y="280">
+<port name="x">405.64102</port>
+<port name="y">253.83246</port>
+<port name="width">10.0</port>
+<port name="height">10.0</port>
+<port name="fill">#ffffffff</port>
+<port name="stroke">#000000ff</port>
+<port name="strokeWeight">1.0</port>
+</node>
+<conn input="blobFromList1" inputPort="blobs" output="inputSplitter1" outputPort="output"/>
+<conn input="rect1" inputPort="x" output="blobFromList1" outputPort="X"/>
+<conn input="rect1" inputPort="y" output="blobFromList1" outputPort="Y"/>
+<conn input="blobFromList1" inputPort="index" output="looperVariables1" outputPort="index"/>
+</node>
+<node name="mouse1" type="nodebox.builtins.device.Mouse" x="5" y="45"/>
+<conn input="looper1" inputPort="inputSplitter1_input" output="fluid1" outputPort="forces"/>
+<conn input="blobDetect1" inputPort="inputImage" output="capture1" outputPort="image"/>
+<conn input="looper2" inputPort="inputSplitter1_input" output="blobDetect1" outputPort="blobs"/>
+<conn input="fluid1" inputPort="x" output="looper2" outputPort="blobFromList1_X"/>
+<conn input="fluid1" inputPort="y" output="looper2" outputPort="blobFromList1_Y"/>
+<conn input="expression1" inputPort="a" output="looper2" outputPort="blobFromList1_X"/>
+<conn input="fluid1" inputPort="previousX" output="expression1" outputPort="result"/>
+<conn input="expression2" inputPort="a" output="looper2" outputPort="blobFromList1_Y"/>
+<conn input="fluid1" inputPort="previousY" output="expression2" outputPort="result"/>
+</node>
+</ndbx>

@@ -9,8 +9,8 @@ import java.util.ArrayList;
 
 public class Fluid extends Node {
 
-    private static final int width = 500;
-    private static final int height = 500;
+    private static final float width = 800;
+    private static final float height = 500;
     private static final float FLUID_WIDTH = 20;
     private MSAFluidSolver2D fluidSolver;
     private static float invWidth, invHeight;

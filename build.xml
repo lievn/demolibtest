@@ -24,6 +24,8 @@
         <path path="${lib}/tritonus_aos.jar"/>
         <path path="${lib}/tritonus_share.jar"/>
         <path path="${lib}/MSAFluid.jar"/>
+        <path path="${lib}/tuio.jar"/>
+        <path path="${lib}/javaosc.jar"/>
     </path>
 
     <target name="init">
@@ -47,6 +49,8 @@
         <copy file="${lib}/tritonus_aos.jar" todir="${build}"/>
         <copy file="${lib}/tritonus_share.jar" todir="${build}"/>
         <copy file="${lib}/MSAFluid.jar" todir="${build}"/>
+        <copy file="${lib}/tuio.jar" todir="${build}"/>
+        <copy file="${lib}/javaosc.jar" todir="${build}"/>
     </target>
 
     <target name="dist" depends="compile,embed-dependencies">

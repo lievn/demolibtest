@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ndbx formatVersion="3">
+<node displayName="Root" name="root" type="nodebox.node.Network" x="0" y="0">
+<node name="looper1" type="nodebox.builtins.utility.Looper" x="301" y="173">
+<port name="amount">2</port>
+<node name="cursorFromList1" type="demolibtest.CursorFromList" x="225" y="26">
+<port name="index">1</port>
+<port name="width">500</port>
+<port name="height">500</port>
+</node>
+<node name="ellipse1" rendered="true" type="nodebox.builtins.draw.Ellipse" x="443" y="88">
+<port name="x">279.0</port>
+<port name="y">234.0</port>
+<port name="width">20.0</port>
+<port name="height">20.0</port>
+<port name="fill">#ffffffff</port>
+<port name="stroke">#000000ff</port>
+<port name="strokeWeight">1.0</port>
+</node>
+<node name="expression1" type="nodebox.builtins.math.Expression" x="239" y="185">
+<data name="expression">a + b*10</data>
+<port name="a">20.0</port>
+<port name="b">0.0</port>
+</node>
+<node name="inputSplitter1" type="nodebox.builtins.utility.InputSplitter" x="34" y="19">
+<port name="input" published="true"/>
+</node>
+<node name="looperVariables1" type="nodebox.builtins.utility.LooperVariables" x="45" y="94"/>
+<conn input="ellipse1" inputPort="x" output="cursorFromList1" outputPort="X"/>
+<conn input="ellipse1" inputPort="y" output="cursorFromList1" outputPort="Y"/>
+<conn input="cursorFromList1" inputPort="index" output="looperVariables1" outputPort="index"/>
+<conn input="cursorFromList1" inputPort="cursors" output="inputSplitter1" outputPort="output"/>
+<conn input="ellipse1" inputPort="width" output="expression1" outputPort="result"/>
+<conn input="ellipse1" inputPort="height" output="expression1" outputPort="result"/>
+<conn input="expression1" inputPort="b" output="cursorFromList1" outputPort="M"/>
+</node>
+<node name="tuio1" rendered="true" type="demolibtest.Tuio" x="60" y="136"/>
+<conn input="looper1" inputPort="inputSplitter1_input" output="tuio1" outputPort="cursors"/>
+<conn input="looper1" inputPort="amount" output="tuio1" outputPort="cursorsNb"/>
+</node>
+</ndbx>
