@@ -8,44 +8,44 @@
 <property key="processing.frameRate" value="60"/>
 <property key="processing.renderer" value="processing.core.PGraphicsJava2D"/>
 <node displayName="Root" name="root" type="nodebox.node.Network" x="0" y="0">
-<node name="fluid1" rendered="true" type="demolibtest.Fluid" x="232" y="184">
-<port name="x">24.0</port>
-<port name="y">0.0</port>
-<port name="previousX">24.0</port>
-<port name="previousY">0.0</port>
+<node name="fluid1" type="demolibtest.Fluid" x="176" y="143">
+<port name="x">41.0</port>
+<port name="y">291.0</port>
+<port name="previousX">41.0</port>
+<port name="previousY">291.0</port>
 <port name="amount">300</port>
 </node>
-<node name="looper1" type="nodebox.builtins.utility.Looper" x="411" y="126">
+<node name="looper1" rendered="true" type="nodebox.builtins.utility.Looper" x="411" y="126">
 <port name="amount">262</port>
 <node name="ellipse1" rendered="true" type="nodebox.builtins.draw.Ellipse" x="445" y="187">
-<port name="x">484.53946</port>
-<port name="y">175.45447</port>
-<port name="width">10.288383</port>
-<port name="height">10.288383</port>
+<port name="x">7.8828697</port>
+<port name="y">377.8097</port>
+<port name="width">20.38263</port>
+<port name="height">20.38263</port>
 <port name="fill">#ffa54a6c</port>
 <port name="stroke">#0000002e</port>
 <port name="strokeWeight">1.0</port>
 </node>
-<node name="expression1" type="nodebox.builtins.math.Expression" x="355" y="53">
+<node name="expression1" type="nodebox.builtins.math.Expression" x="294" y="61">
 <data name="expression">a + b*Math.sin(c/10.0)</data>
 <port name="a">20.0</port>
 <port name="b">10.0</port>
-<port name="c">484.53946</port>
+<port name="c">107.57486</port>
+</node>
+<node name="forceFromList1" type="demolibtest.ForceFromList" x="162" y="165">
+<port name="index">164</port>
 </node>
 <node name="inputSplitter1" type="nodebox.builtins.utility.InputSplitter" x="74" y="71">
 <port name="input" published="true"/>
 </node>
 <node name="looperVariables1" type="nodebox.builtins.utility.LooperVariables" x="76" y="292"/>
-<node name="pickForce1" type="demolibtest.PickForce" x="115" y="157">
-<port name="index">261</port>
-</node>
-<conn input="pickForce1" inputPort="forces" output="inputSplitter1" outputPort="output"/>
-<conn input="pickForce1" inputPort="index" output="looperVariables1" outputPort="index"/>
-<conn input="ellipse1" inputPort="x" output="pickForce1" outputPort="X"/>
-<conn input="ellipse1" inputPort="y" output="pickForce1" outputPort="Y"/>
-<conn input="expression1" inputPort="c" output="pickForce1" outputPort="X"/>
 <conn input="ellipse1" inputPort="width" output="expression1" outputPort="result"/>
 <conn input="ellipse1" inputPort="height" output="expression1" outputPort="result"/>
+<conn input="forceFromList1" inputPort="forces" output="inputSplitter1" outputPort="output"/>
+<conn input="forceFromList1" inputPort="index" output="looperVariables1" outputPort="index"/>
+<conn input="expression1" inputPort="c" output="forceFromList1" outputPort="X"/>
+<conn input="ellipse1" inputPort="x" output="forceFromList1" outputPort="X"/>
+<conn input="ellipse1" inputPort="y" output="forceFromList1" outputPort="Y"/>
 </node>
 <node name="mouse1" type="nodebox.builtins.device.Mouse" x="-40" y="193"/>
 <conn input="fluid1" inputPort="x" output="mouse1" outputPort="x"/>

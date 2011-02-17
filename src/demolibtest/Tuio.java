@@ -4,35 +4,38 @@ package demolibtest;
 import nodebox.node.*;
 import processing.core.PGraphics;
 import tuio.*;
-//import tuio.TuioClient;
-//import tuio.TuioCursor;
-
-
 import java.util.ArrayList;
+
+@Description("TuioClient")
+@Category("Tuio")
 
 public class Tuio extends Node {
 
     public final CursorList allCursors = new CursorList(this, "cursors", Port.Direction.OUTPUT);
     public final IntPort totalCursors = new IntPort(this, "cursorsNb", Port.Direction.OUTPUT);
+    public final ObjectList allObjects = new ObjectList(this, "objects", Port.Direction.OUTPUT);
+    public final IntPort totalObjects = new IntPort(this, "objectsNb", Port.Direction.OUTPUT);
 
     TuioClient tuioClient;
 
 
     @Override
     public void initialize() {
-       tuioClient  = new TuioClient(getScene().getApplet());
 
     }
 
     @Override
     public void execute(Context context, float time) {
+        if(tuioClient == null){
+        tuioClient  = new TuioClient(getScene().getApplet());
+        }
         computeCursors();
+        computeObjects();
 
     }
 
     @Override
     public void draw(PGraphics g, Context context, float v) {
-
 
     }
 
@@ -47,9 +50,18 @@ public class Tuio extends Node {
         }
         allCursors.set(cursors);
         totalCursors.set(tuioClient.getTuioCursors().length);
-        //totalBlobs.set(theBlobDetection.getBlobNb());
     }
 
+    public void computeObjects() {
+        TuioObject tobj;
+        ArrayList<TuioObject> objects = new ArrayList<TuioObject>();
+        for (int n = 0; n < tuioClient.getTuioObjects().length; n++) {
+            tobj = tuioClient.getTuioObjects()[n];
+                objects.add(tobj);
+        }
+        allObjects.set(objects);
+        totalObjects.set(tuioClient.getTuioObjects().length);
+    }
 
 
 

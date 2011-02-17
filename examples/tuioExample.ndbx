@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ndbx formatVersion="3">
+<node displayName="Root" name="root" type="nodebox.node.Network" x="0" y="0">
+<node name="looper1" type="nodebox.builtins.utility.Looper" x="248" y="74">
+<port name="amount">0</port>
+<node name="cursorFromList1" type="demolibtest.CursorFromList" x="256" y="88">
+<port name="index">1</port>
+<port name="width">500</port>
+<port name="height">500</port>
+</node>
+<node name="ellipse1" rendered="true" type="nodebox.builtins.draw.Ellipse" x="470" y="111">
+<port name="x">279.0</port>
+<port name="y">234.0</port>
+<port name="width">20.0</port>
+<port name="height">20.0</port>
+<port name="fill">#ffffffff</port>
+<port name="stroke">#000000ff</port>
+<port name="strokeWeight">1.0</port>
+</node>
+<node name="expression1" type="nodebox.builtins.math.Expression" x="317" y="211">
+<data name="expression">a*10+b</data>
+<port name="a">0.0</port>
+<port name="b">20.0</port>
+</node>
+<node name="inputSplitter1" type="nodebox.builtins.utility.InputSplitter" x="77" y="22">
+<port name="input" published="true"/>
+</node>
+<node name="looperVariables1" type="nodebox.builtins.utility.LooperVariables" x="128" y="269"/>
+<conn input="cursorFromList1" inputPort="cursors" output="inputSplitter1" outputPort="output"/>
+<conn input="cursorFromList1" inputPort="index" output="looperVariables1" outputPort="index"/>
+<conn input="ellipse1" inputPort="x" output="cursorFromList1" outputPort="X"/>
+<conn input="ellipse1" inputPort="y" output="cursorFromList1" outputPort="Y"/>
+<conn input="expression1" inputPort="a" output="cursorFromList1" outputPort="M"/>
+<conn input="ellipse1" inputPort="width" output="expression1" outputPort="result"/>
+<conn input="ellipse1" inputPort="height" output="expression1" outputPort="result"/>
+</node>
+<node name="looper2" rendered="true" type="nodebox.builtins.utility.Looper" x="254" y="220">
+<port name="amount">3</port>
+<node name="inputSplitter1" type="nodebox.builtins.utility.InputSplitter" x="36" y="17">
+<port name="input" published="true"/>
+</node>
+<node name="looperVariables1" type="nodebox.builtins.utility.LooperVariables" x="58" y="226"/>
+<node name="objectFromList1" type="demolibtest.ObjectFromList" x="297" y="79">
+<port name="index">2</port>
+<port name="width">500</port>
+<port name="height">500</port>
+</node>
+<node name="rect1" rendered="true" type="nodebox.builtins.draw.Rect" x="503" y="80">
+<port name="x">371.0</port>
+<port name="y">136.0</port>
+<port name="width">40.0</port>
+<port name="height">40.0</port>
+<port name="fill">#ffffffff</port>
+<port name="stroke">#000000ff</port>
+<port name="strokeWeight">1.0</port>
+</node>
+<conn input="objectFromList1" inputPort="objects" output="inputSplitter1" outputPort="output"/>
+<conn input="objectFromList1" inputPort="index" output="looperVariables1" outputPort="index"/>
+<conn input="rect1" inputPort="x" output="objectFromList1" outputPort="X"/>
+<conn input="rect1" inputPort="y" output="objectFromList1" outputPort="Y"/>
+</node>
+<node name="tuio1" type="demolibtest.Tuio" x="66" y="113"/>
+<conn input="looper1" inputPort="inputSplitter1_input" output="tuio1" outputPort="cursors"/>
+<conn input="looper1" inputPort="amount" output="tuio1" outputPort="cursorsNb"/>
+<conn input="looper2" inputPort="inputSplitter1_input" output="tuio1" outputPort="objects"/>
+<conn input="looper2" inputPort="amount" output="tuio1" outputPort="objectsNb"/>
+</node>
+</ndbx>

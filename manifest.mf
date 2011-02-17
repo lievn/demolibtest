@@ -7,4 +7,4 @@ Bundle-ClassPath: .,phys2d.jar,blobDetection.jar,sms.jar,minim.jar,minim-spi.jar
 Bundle-NativeCode: libUnimotionLib.jnilib ; osname=macosx ; processor=x86
 DynamicImport-Package: *
 Import-Package: org.osgi.framework, processing.core, nodebox.node, nodebox.util
-Export-Node: demolibtest.PhysicsNode, demolibtest.BlobDetect, demolibtest.MotionSensor, demolibtest.BlobFromList, demolibtest.EdgeFromList, demolibtest.fftAnalysis, demolibtest.FastBlur,demolibtest.Fluid,demolibtest.ForceFromList,demolibtest.PickForce,demolibtest.Tuio,demolibtest.CursorFromList
+Export-Node: demolibtest.PhysicsNode, demolibtest.BlobDetect, demolibtest.MotionSensor, demolibtest.BlobFromList, demolibtest.EdgeFromList, demolibtest.fftAnalysis, demolibtest.FastBlur,demolibtest.Fluid,demolibtest.ForceFromList,demolibtest.Tuio,demolibtest.CursorFromList,demolibtest.ObjectFromList
