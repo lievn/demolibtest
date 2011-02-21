@@ -1,11 +1,13 @@
 package demolibtest;
 
-import blobDetection.Blob;
 import msafluid.MSAFluidSolver2D;
 import nodebox.node.*;
 import processing.core.PGraphics;
 
 import java.util.ArrayList;
+
+@Description("Fluid")
+@Category("MSAFluid")
 
 public class Fluid extends Node {
 

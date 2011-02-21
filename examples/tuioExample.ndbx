@@ -36,28 +36,69 @@
 </node>
 <node name="looper2" rendered="true" type="nodebox.builtins.utility.Looper" x="254" y="220">
 <port name="amount">3</port>
+<node name="expression1" type="nodebox.builtins.math.Expression" x="51" y="239">
+<data name="expression">a -b</data>
+<port name="a">394.0</port>
+<port name="b">250.0</port>
+</node>
+<node name="expression2" type="nodebox.builtins.math.Expression" x="52" y="308">
+<data name="expression">a - b</data>
+<port name="a">233.0</port>
+<port name="b">250.0</port>
+</node>
+<node name="expression3" type="nodebox.builtins.math.Expression" x="54" y="382">
+<data name="expression">a * b</data>
+<port name="a">4.8520236</port>
+<port name="b">60.0</port>
+</node>
 <node name="inputSplitter1" type="nodebox.builtins.utility.InputSplitter" x="36" y="17">
 <port name="input" published="true"/>
 </node>
-<node name="looperVariables1" type="nodebox.builtins.utility.LooperVariables" x="58" y="226"/>
-<node name="objectFromList1" type="demolibtest.ObjectFromList" x="297" y="79">
+<node name="looperVariables1" type="nodebox.builtins.utility.LooperVariables" x="35" y="74"/>
+<node name="objectFromList1" type="demolibtest.ObjectFromList" x="241" y="21">
 <port name="index">2</port>
 <port name="width">500</port>
 <port name="height">500</port>
 </node>
-<node name="rect1" rendered="true" type="nodebox.builtins.draw.Rect" x="503" y="80">
-<port name="x">371.0</port>
-<port name="y">136.0</port>
+<node name="rect1" type="nodebox.builtins.draw.Rect" x="444" y="22">
+<port name="x">394.0</port>
+<port name="y">233.0</port>
 <port name="width">40.0</port>
 <port name="height">40.0</port>
 <port name="fill">#ffffffff</port>
 <port name="stroke">#000000ff</port>
 <port name="strokeWeight">1.0</port>
 </node>
+<node name="rectNode1" type="nodebox.graphics.nodes.RectNode" x="246" y="238">
+<port name="x">144.0</port>
+<port name="y">-17.0</port>
+<port name="width">30.0</port>
+<port name="height">30.0</port>
+<port name="rx">0.0</port>
+<port name="ry">0.0</port>
+<port name="fill">#ffffffff</port>
+<port name="stroke">#000000ff</port>
+<port name="strokeWeight">1.0</port>
+</node>
+<node name="transformNode1" rendered="true" type="nodebox.graphics.nodes.TransformNode" x="444" y="249">
+<port name="order">trs</port>
+<port name="tx">0.0</port>
+<port name="ty">0.0</port>
+<port name="r">291.12143</port>
+<port name="sx">100.0</port>
+<port name="sy">100.0</port>
+</node>
 <conn input="objectFromList1" inputPort="objects" output="inputSplitter1" outputPort="output"/>
 <conn input="objectFromList1" inputPort="index" output="looperVariables1" outputPort="index"/>
 <conn input="rect1" inputPort="x" output="objectFromList1" outputPort="X"/>
 <conn input="rect1" inputPort="y" output="objectFromList1" outputPort="Y"/>
+<conn input="transformNode1" inputPort="inputGeometry" output="rectNode1" outputPort="outputGeometry"/>
+<conn input="expression1" inputPort="a" output="objectFromList1" outputPort="X"/>
+<conn input="rectNode1" inputPort="x" output="expression1" outputPort="result"/>
+<conn input="expression2" inputPort="a" output="objectFromList1" outputPort="Y"/>
+<conn input="rectNode1" inputPort="y" output="expression2" outputPort="result"/>
+<conn input="expression3" inputPort="a" output="objectFromList1" outputPort="A"/>
+<conn input="transformNode1" inputPort="r" output="expression3" outputPort="result"/>
 </node>
 <node name="tuio1" type="demolibtest.Tuio" x="66" y="113"/>
 <conn input="looper1" inputPort="inputSplitter1_input" output="tuio1" outputPort="cursors"/>

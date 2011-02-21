@@ -1,7 +1,6 @@
 package demolibtest;
 
 import nodebox.node.*;
-import blobDetection.Blob;
 import blobDetection.EdgeVertex;
 import java.util.ArrayList;
 

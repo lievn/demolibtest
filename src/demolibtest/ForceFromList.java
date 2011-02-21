@@ -4,6 +4,8 @@ package demolibtest;
 import nodebox.node.*;
 import processing.core.PGraphics;
 
+@Description("Reads a Fluid Force")
+@Category("MSAFluid")
 
 public class ForceFromList extends Node{
 

@@ -2,31 +2,38 @@ package demolibtest;
 
 import nodebox.node.*;
 import processing.core.PGraphics;
+import processing.core.PImage;
 
 
 public class FastBlur extends Node {
 
-    public final ImagePort pImage = new ImagePort(this, "inputImage", Port.Direction.INPUT);
-    public final IntPort blur = new IntPort(this, "blur", Port.Direction.INPUT, 2);
+    public final ImagePort pImage = new ImagePort(this, "input", Port.Direction.INPUT);
+    public final IntPort blur = new IntPort(this, "blur", Port.Direction.INPUT, 10);
+    public final ImagePort pImageO = new ImagePort(this, "output", Port.Direction.OUTPUT);
+
+    PImage imgSmall;
 
     public void execute(Context context, float time) {
 
+        imgSmall = new PImage(320, 240);
+        imgSmall.copy(pImage.get(), 0, 0, pImage.get().width, pImage.get().height, 0, 0, imgSmall.width, imgSmall.height);
+        fastblur(imgSmall,blur.get());
+        pImageO.set(imgSmall);
     }
 
     @Override
     public void draw(PGraphics g, Context context, float v) {
         if (pImage.get() != null) {
-            fastblur(blur.get());
-
+           g.image(imgSmall, 0, 0, pImage.get().width, pImage.get().height);
         }
     }
 
-    public void fastblur(int radius) {
+    public void fastblur(PImage img ,int radius) {
         if (radius < 1) {
             return;
         }
-        int w = pImage.get().width;
-        int h = pImage.get().height;
+        int w = img.width;
+        int h = img.height;
         int wm = w - 1;
         int hm = h - 1;
         int wh = w * h;
@@ -37,7 +44,7 @@ public class FastBlur extends Node {
         int rsum, gsum, bsum, x, y, i, p, p1, p2, yp, yi, yw;
         int vmin[] = new int[Math.max(w, h)];
         int vmax[] = new int[Math.max(w, h)];
-        int[] pix = pImage.get().pixels;
+        int[] pix = img.pixels;
         int dv[] = new int[256 * div];
         for (i = 0; i < 256 * div; i++) {
             dv[i] = (i / div);

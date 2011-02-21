@@ -11,6 +11,9 @@ import processing.core.PImage;
 
 import java.util.ArrayList;
 
+@Description("Blob and edgedetection")
+@Category("Blobdetection")
+
 public class BlobDetect extends Node {
 
     public final ImagePort pImage = new ImagePort(this, "inputImage", Port.Direction.INPUT);
@@ -175,7 +178,7 @@ public class BlobDetect extends Node {
             }
         }
         allEdges.set(edges);
-        totalEdges.set(total);
+        totalEdges.set(edges.size());
     }
 
 

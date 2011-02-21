@@ -5,6 +5,9 @@ import nodebox.node.*;
 import processing.core.PGraphics;
 
 
+@Description("Select and Edge from the edgelist")
+@Category("Blobdetection")
+
 public class EdgeFromList extends Node{
 
     public final EdgeList allEdges = new EdgeList(this, "edges", Port.Direction.INPUT);

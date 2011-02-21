@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ndbx formatVersion="3">
+<node displayName="Root" name="root" type="nodebox.node.Network" x="0" y="0">
+<node name="blobDetect1" rendered="true" type="demolibtest.BlobDetect" x="162" y="197">
+<port name="threshold">0.45000002</port>
+<port name="posdiscr">false</port>
+<port name="drawblobs">true</port>
+<port name="drawedges">true</port>
+<port name="drawtriangles">false</port>
+<port name="drawImage">true</port>
+</node>
+<node name="capture1" type="nodebox.video.Capture" x="11" y="96"/>
+<node name="fastBlur1" type="demolibtest.FastBlur" x="191" y="95">
+<port name="blur">3</port>
+</node>
+<node name="looper1" type="nodebox.builtins.utility.Looper" x="382" y="205">
+<port name="amount">254</port>
+<node name="edgeFromList1" type="demolibtest.EdgeFromList" x="267" y="60">
+<port name="index">253</port>
+<port name="width">500.0</port>
+<port name="height">500.0</port>
+</node>
+<node name="edgeFromList2" type="demolibtest.EdgeFromList" x="271" y="187">
+<port name="index">254</port>
+<port name="width">500.0</port>
+<port name="height">500.0</port>
+</node>
+<node name="expression1" type="nodebox.builtins.math.Expression" x="102" y="307">
+<data name="expression">a - b</data>
+<port name="a">253.0</port>
+<port name="b">-1.0</port>
+</node>
+<node name="inputSplitter1" type="nodebox.builtins.utility.InputSplitter" x="60" y="59">
+<port name="input" published="true"/>
+</node>
+<node name="line1" rendered="true" type="nodebox.builtins.draw.Line" x="476" y="67">
+<port name="x1">500.0</port>
+<port name="y1">431.0345</port>
+<port name="x2">500.0</port>
+<port name="y2">431.0345</port>
+<port name="stroke">#000000ff</port>
+<port name="strokeWeight">1.0</port>
+</node>
+<node name="looperVariables1" type="nodebox.builtins.utility.LooperVariables" x="63" y="171"/>
+<conn input="edgeFromList1" inputPort="index" output="looperVariables1" outputPort="index"/>
+<conn input="edgeFromList1" inputPort="edges" output="inputSplitter1" outputPort="output"/>
+<conn input="line1" inputPort="x1" output="edgeFromList1" outputPort="X"/>
+<conn input="line1" inputPort="y1" output="edgeFromList1" outputPort="Y"/>
+<conn input="expression1" inputPort="a" output="looperVariables1" outputPort="index"/>
+<conn input="edgeFromList2" inputPort="index" output="expression1" outputPort="result"/>
+<conn input="edgeFromList2" inputPort="edges" output="inputSplitter1" outputPort="output"/>
+<conn input="line1" inputPort="x2" output="edgeFromList2" outputPort="X"/>
+<conn input="line1" inputPort="y2" output="edgeFromList2" outputPort="Y"/>
+</node>
+<conn input="fastBlur1" inputPort="input" output="capture1" outputPort="image"/>
+<conn input="blobDetect1" inputPort="inputImage" output="fastBlur1" outputPort="output"/>
+<conn input="looper1" inputPort="inputSplitter1_input" output="blobDetect1" outputPort="edges"/>
+<conn input="looper1" inputPort="amount" output="blobDetect1" outputPort="EdgesNb"/>
+</node>
+</ndbx>

@@ -3,9 +3,14 @@ package demolibtest;
 import ddf.minim.AudioInput;
 import ddf.minim.Minim;
 import ddf.minim.analysis.FFT;
+import nodebox.node.Category;
 import nodebox.node.Context;
+import nodebox.node.Description;
 import nodebox.node.Node;
 import processing.core.PGraphics;
+
+@Description("FFT Analysis")
+@Category("Minim")
 
 public class fftAnalysis extends Node {
 

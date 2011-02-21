@@ -5,6 +5,9 @@ import nodebox.node.*;
 import processing.core.PGraphics;
 
 
+@Description("Select a blob from the bloblist")
+@Category("Blobdetection")
+
 public class BlobFromList extends Node{
 
     public final BlobList allBlobs = new BlobList(this, "blobs", Port.Direction.INPUT);

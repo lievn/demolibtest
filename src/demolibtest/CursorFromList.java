@@ -4,7 +4,7 @@ import nodebox.node.*;
 import processing.core.PGraphics;
 import tuio.TuioCursor;
 
-@Description("Reads a Tuio cursor")
+@Description("Reads a Tuio (finger) cursor")
 @Category("Tuio")
 
 

@@ -1,11 +1,11 @@
 package demolibtest;
 
-import nodebox.node.Context;
-import nodebox.node.IntPort;
-import nodebox.node.Node;
-import nodebox.node.Port;
+import nodebox.node.*;
 import processing.core.PGraphics;
 import sms.Unimotion;
+
+@Description("Reads the mac tilt sensor")
+@Category("SMSarray")
 
 public class MotionSensor extends Node {
 
